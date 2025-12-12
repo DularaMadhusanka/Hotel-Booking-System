@@ -2,19 +2,10 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {
-      colors: {
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
-      },
-      fontFamily: {
-        outfit: ['Outfit', 'sans-serif'],
-        playfair: ['Playfair', 'serif'],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 }
