@@ -3,6 +3,7 @@ import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import clerkWebhooks from "./controllers/clerkWebhooks.js";
 
 dotenv.config(); // Load .env variables
 
@@ -12,6 +13,9 @@ const app = express();
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json());
 app.use(clerkMiddleware());
+
+// API listen to clerk webhooks
+app.use('/api/clerk' , clerkWebhooks)
 
 // Test route
 app.get('/', (req, res) => res.send("API is working"));
