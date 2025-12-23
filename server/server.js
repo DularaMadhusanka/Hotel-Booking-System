@@ -6,8 +6,11 @@ import dotenv from "dotenv";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import userRouter from "./routes/userRouters.js";
 import hotelRouter from "./routes/hotelRoutes.js";
+import connectCloudinary from "./configs/cloudinary.js";
+import roomRouter from "./routes/roomRoutes.js";
 
 dotenv.config(); // Load .env variables
+connectCloudinary();
 
 const app = express();
 
@@ -24,6 +27,7 @@ app.use('/api/clerk' , clerkWebhooks)
 app.get('/', (req, res) => res.send("API is working"));
 app.use('/api/user',userRouter);
 app.use('/api/hotels',hotelRouter);
+app.use('/api/rooms',roomRouter);
 
 // MongoDB connection
 const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://admin:123@cluster0.fxaje3d.mongodb.net/studentDB?retryWrites=true&w=majority";
