@@ -10,7 +10,7 @@ export const createRoom = async (req, res) => {
     if (!hotel) return res.json({ success: false, Message: "No Hotel found" });
 
     const images = await Promise.all(
-      req.files.map(file =>
+      (req.files || []).map(file =>
         cloudinary.uploader.upload(file.path).then(r => r.secure_url)
       )
     );
@@ -47,6 +47,10 @@ export const getRooms = async (req, res) => {
 export const getOwnerRooms = async (req, res) => {
   try {
     const hotel = await Hotel.findOne({ owner: req.auth.userId });
+    if (!hotel) {
+      return res.json({ success: false, message: "No Hotel found" });
+    }
+
     const rooms = await Room.find({ hotel: hotel._id }).populate("hotel");
 
     res.json({ success: true, rooms });
