@@ -2,6 +2,30 @@ import React from 'react';
 import { assets, cities } from '../assets/assets';
 
 const Hero = () => {
+
+  
+		const {navigate,getToken, axios, setSearchedCities} = useAppContext()
+  const [destination , setDestination] = useState("")
+  const onSearch = async (e)=>{
+    e.preventDefault();
+    navigate(`/rooms?destination=${destination}`)
+
+    //call api to save reent searchrd city
+
+    await axios.post('/api/user/store-recent-search',{recentSearchedCity: destination},{headers :{Authorization :`Bearer ${await getToken()}`}});
+
+    //search cities
+
+    setSearchedCities((prevSearchedCities)=> {
+   const updatedSearchedCities = [...prevSearchedCities,destination];
+   if(updatedSearchedCities.length>3){
+    updatedSearchedCities.shift();
+   }
+   return updatedSearchedCities;
+    })
+
+  }
+
   return (
     <div className='relative flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-[url("/src/assets/heroImage.png")] bg-no-repeat bg-cover bg-center h-screen'>
 
@@ -22,7 +46,7 @@ const Hero = () => {
       </p>
 
       {/* FORM */}
-      <form className='relative z-10 bg-white text-gray-500 rounded-lg px-6 py-4 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto mt-6'>
+      <form  onSubmit={onSearch} className='relative z-10 bg-white text-gray-500 rounded-lg px-6 py-4 flex flex-col md:flex-row max-md:items-start gap-4 max-md:mx-auto mt-6'>
 
         {/* Destination */}
         <div>
@@ -31,12 +55,18 @@ const Hero = () => {
             <label htmlFor="destination">Destination</label>
           </div>
 
-          <select id="destination" className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none w-full">
-            <option value="">Select Destination</option>
-            {cities.map((city, index) => (
-              <option key={index} value={city}>{city}</option>
+          <input
+           onChange={e => setDestination(e.target.value)} value={destination}
+           list='destinayions'
+            id="destinationInput"
+            type="date"
+            className="rounded border border-gray-200 px-3 py-1.5 mt-1.5 text-sm outline-none" placeholder='Type here' required
+          />
+          <datalist id='destinations'> 
+            {cities.map((city,index)=>(
+              <option value={city} key={index}/>
             ))}
-          </select>
+          </datalist>
         </div>
 
         {/* Check-in */}
