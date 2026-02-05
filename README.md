@@ -880,8 +880,8 @@ The cooking class is also possible if you have 2-3 hours."
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-repo/hotel-booking-system.git
-cd hotel-booking-system
+git clone https://github.com/DularaMadhusanka/Hotel-Booking-System.git
+cd Hotel-Booking-System
 ```
 
 ### 2. Backend Setup
@@ -925,7 +925,7 @@ npm run dev
 ### 4. AI Service Setup
 
 ```bash
-cd ../RAG/langchain-rag-tutorial
+cd ai-service
 
 # Create virtual environment
 python -m venv venv
@@ -1007,6 +1007,27 @@ POST /api/ai/chat
 | 4 | Booking Management | 4 CRUDs | Availability for dynamic pricing |
 | 5 | Review Management | 4 CRUDs | Sentiment analysis integration |
 | 6 | Payment Management | 4 CRUDs | Transaction logging |
+
+---
+
+## 👥 Contributors
+
+### Project Development
+
+| Contributor | Role | Contributions |
+|-------------|------|---------------|
+| **Dulara Madhusanka** | Lead Developer | AI Integration (LangGraph, LangChain, RAG), Sentiment Analysis, Negotiation Agent, GraphRAG Engine, Complete CRUD Implementation, Bug Fixes, Code Refactoring, Review & Payment Modules |
+| **Chamodi Jayasinghe** | Initial Developer | Original MERN stack foundation, Initial project structure |
+
+### Contribution Breakdown
+
+| Area | New/Modified |
+|------|--------------|
+| AI Service (Python) | +13,000 lines (100% new) |
+| CRUD Operations | Completed all 6 modules with full CRUD |
+| Bug Fixes | 20+ critical bugs fixed |
+| New Features | Chatbot UI, About, Experience pages |
+| Code Quality | Refactored controllers, models, routes |
 
 ---
 
