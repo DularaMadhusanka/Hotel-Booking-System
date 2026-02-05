@@ -10,6 +10,9 @@ import hotelRouter from "./routes/hotelRoutes.js";
 import connectCloudinary from "./configs/cloudinary.js";
 import roomRouter from "./routes/roomRoutes.js";
 import bookingRouter from "./routes/bookingRoutes.js";
+import reviewRouter from "./routes/reviewRoutes.js";
+import paymentRouter from "./routes/paymentRoutes.js";
+import aiRouter from "./routes/aiRoutes.js";
 
 dotenv.config();// Load .env variables
 connectCloudinary();
@@ -23,15 +26,20 @@ app.use(express.json());
 app.use(clerkMiddleware());
 
 // API listen to clerk webhooks
-app.use('/api/clerk' , clerkWebhooks)
+app.use('/api/clerk', clerkWebhooks);
 
 
 // Test route
 app.get('/', (req, res) => res.send("API is working"));
-app.use('/api/user',userRouter);
-app.use('/api/hotels',hotelRouter);
-app.use('/api/rooms',roomRouter);
-app.use('/api/bookings',bookingRouter);
+
+// API Routes
+app.use('/api/user', userRouter);
+app.use('/api/hotels', hotelRouter);
+app.use('/api/rooms', roomRouter);
+app.use('/api/bookings', bookingRouter);
+app.use('/api/reviews', reviewRouter);
+app.use('/api/payments', paymentRouter);
+app.use('/api/ai', aiRouter);
 
 
 // MongoDB connection

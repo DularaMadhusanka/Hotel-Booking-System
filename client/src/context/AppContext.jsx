@@ -36,7 +36,7 @@ export const AppProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${await getToken()}` }
       });
       if (data.success) {
-        setIsOwner(data.role === "hotelowner"); // fixed typo "hitelowner"
+        setIsOwner(data.role === "hotelOwner");
         setSearchedCities(data.recentSearchedCities);
       } else {
         // retry fetching user details after 5 seconds

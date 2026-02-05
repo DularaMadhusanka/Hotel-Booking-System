@@ -9,7 +9,7 @@
 @tailwind utilities;
 
 /* Custom CSS Variables */
-root {
+:root {
   --color-primary: #2563EB;
   --color-secondary: #FBBF24;
 }

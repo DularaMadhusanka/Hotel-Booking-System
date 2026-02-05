@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Title from '../../components/Title'
 import { roomsDummyData } from '../../assets/assets'
 import { useAppContext } from '../../context/AppContext'
-import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState([])
@@ -45,9 +45,9 @@ const ListRoom = () => {
     <div>
       <Title 
         align='left' 
-        fon='outfit' 
+        font='outfit' 
         title='Room Listings' 
-        subTitle='View,edit, or manage all listed rooms.Keep the information up-to-date to provide the best experience for users.' 
+        subTitle='View, edit, or manage all listed rooms. Keep the information up-to-date to provide the best experience for users.' 
       />
 
       <p className='text-gray-500 mt-8'>All Rooms</p>

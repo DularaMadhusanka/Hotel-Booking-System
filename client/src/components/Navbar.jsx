@@ -27,9 +27,9 @@ const BookIcon = () => (
 const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Hotels", path: "/rooms" },
-    { name: "Experience", path: "/" },
-    { name: "About", path: "/" },
+    { name: "Rooms", path: "/rooms" },
+    { name: "Experience", path: "/experience" },
+    { name: "About", path: "/about" },
   ];
 
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -168,21 +168,12 @@ const Navbar = () => {
         ))}
       </div>
 
-      {user && (
-        <button
-          className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all"
-          onClick={() =>
-              isOwner ? navigate("/owner") : setShowHotelReg(true)
-            }
-        >
-          {isOwner ? "Dashboard" : "List Your Hotel"}
-        </button>
-      )}
-
       {!user && (
         <button
           onClick={openSignIn}
-          className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500"
+          className={`bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500 hidden md:block ${
+            isScrolled ? "" : "bg-white/20 backdrop-blur-sm"
+          }`}
         >
           Login
         </button>

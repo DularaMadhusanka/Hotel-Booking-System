@@ -31,8 +31,8 @@ const AddRoom = () => {
   })
 
   const [loading, setLoading] = useState(false)
-const onSubmithandler =async(e) => {
-  e.prevenDefault()
+const onSubmitHandler = async(e) => {
+  e.preventDefault()
 
   if(!inputs.roomType || !inputs.pricePerNight || !inputs.amenities || !Object.values(images).some(image => image)){
     toast.error("please fill in all the details");
@@ -42,15 +42,15 @@ const onSubmithandler =async(e) => {
   setLoading(true);
   try {
     const formData = new FormData()
-      formData.append('roomType,',inputs.roomType)
-      formData.append('pricePerNight',inputs.roomPricePerNight)
-    // convet amenities to Array & keeping only enabled Amenities
-    const amenities = object.keys(inputs.amenities).filter(key => inputs.amenities[key])
+      formData.append('roomType', inputs.roomType)
+      formData.append('pricePerNight', inputs.pricePerNight)
+    // convert amenities to Array & keeping only enabled Amenities
+    const amenities = Object.keys(inputs.amenities).filter(key => inputs.amenities[key])
     formData.append('amenities', JSON.stringify(amenities))
 
     //adding images to formData
 
-    object.keys(images).forEach((key)=>{
+    Object.keys(images).forEach((key)=>{
       images[key]  && formData.append('images',images[key])
     })
 
@@ -83,7 +83,7 @@ const onSubmithandler =async(e) => {
 }
   return (
     <div>
-      <form conSubmit={onsubmitHandler}>
+      <form onSubmit={onSubmitHandler}>
         <Title 
           align='left' 
           font='outfit' 

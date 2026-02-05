@@ -1,20 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { assets, facilityIcons, roomCommonData, roomsDummyData } from '../assets/assets'
+import { assets, facilityIcons, roomCommonData } from '../assets/assets'
 import StarRating from '../components/StarRating'
+import { useAppContext } from '../context/AppContext'
+import toast from 'react-hot-toast'
 
 const RoomDetails = () => {
   const { id } = useParams()
+  const { axios, rooms, currency } = useAppContext()
   const [room, setRoom] = useState(null)
   const [mainImage, setMainImage] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  const fetchRoom = async () => {
+    try {
+      // First try to find in existing rooms data
+      const foundRoom = rooms.find(r => r._id === id)
+      if (foundRoom) {
+        setRoom(foundRoom)
+        setMainImage(foundRoom.images?.[0] || null)
+        setLoading(false)
+        return
+      }
+      
+      // If not found, fetch from API
+      const { data } = await axios.get(`/api/rooms/${id}`)
+      if (data.success) {
+        setRoom(data.room)
+        setMainImage(data.room.images?.[0] || null)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const foundRoom = roomsDummyData.find(room => room._id === id)
-    if (foundRoom) {
-      setRoom(foundRoom)
-      setMainImage(foundRoom.images?.[0] || null)
-    }
-  }, [id])
+    fetchRoom()
+  }, [id, rooms])
+
+  if (loading) {
+    return (
+      <div className='py-28 md:py-36 px-4 md:px-16 lg:px-24 xl:px-32 flex justify-center items-center min-h-[60vh]'>
+        <p className='text-gray-500'>Loading room details...</p>
+      </div>
+    )
+  }
 
   return room && (
     <div className='py-28 md:py-36 px-4 md:px-16 lg:px-24 xl:px-32'>
@@ -78,7 +112,7 @@ const RoomDetails = () => {
             ))}
           </div>
         </div>
-        <p className='text-2xl font-medium'>${room.pricePerNight}/night</p>
+        <p className='text-2xl font-medium'>{currency}{room.pricePerNight}/night</p>
       </div>
 
       {/*Check-in / Check-out Form*/}

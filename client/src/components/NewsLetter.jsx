@@ -1,31 +1,53 @@
 import React from 'react';
-import { assets } from '../assets/assets';
-import Title from './Title';
 
 function NewsLetter() {
   return (
-    <div className="flex flex-col items-center max-w-5xl lg:w-full rounded-2xl px-4 py-12 md:py-16 mx-2 lg:mx-auto my-30 bg-gray-900 text-white">
-      <Title
-        title="Stay Inspired"
-        subTitle="Join our newsletter and be the first to discover new destinations, exclusive offers, and travel inspiration."
-      />
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-6">
-        <input
-          type="text"
-          className="bg-white/10 px-4 py-2.5 border border-white/20 rounded outline-none max-w-[264px] w-full"
-          placeholder="Enter your email"
-        />
-        <button className="flex items-center justify-center gap-2 group bg-black px-4 md:px-7 py-2.5 rounded active:scale-95 transition-all">
-          Subscribe
-          <img
-            src={assets.arrowIcon}
-            alt="arrow-icon"
-            className="w-3.5 invert group-hover:translate-x-1 transition-all"
-          />
-        </button>
+    <div className="relative overflow-hidden flex flex-col items-center max-w-5xl lg:w-full rounded-2xl px-6 py-12 md:py-16 mx-4 lg:mx-auto my-16 bg-gradient-to-br from-emerald-800 to-teal-900 text-white">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-48 h-48 bg-teal-500/20 rounded-full blur-3xl"></div>
+      
+      <div className="relative z-10 text-center">
+        <span className="text-5xl mb-4 block">🏔️</span>
+        <h2 className="font-playfair text-3xl md:text-4xl font-bold">
+          Ready to Experience Ella?
+        </h2>
+        <p className="text-emerald-100 mt-4 max-w-xl mx-auto">
+          Book your stay at Cloudy Hill Cottage and wake up to breathtaking mountain views, 
+          authentic Sri Lankan hospitality, and unforgettable experiences.
+        </p>
       </div>
-      <p className="text-gray-500 mt-6 text-xs text-center">
-        By subscribing, you agree to our Privacy Policy and consent to receive updates.
+
+      <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+        <a 
+          href="tel:+94715934715"
+          className="flex items-center gap-2 bg-white text-emerald-800 px-6 py-3 rounded-full font-medium hover:bg-emerald-50 transition-colors"
+        >
+          📞 +94 71 593 4715
+        </a>
+        <a 
+          href="/rooms"
+          className="flex items-center gap-2 border-2 border-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition-colors"
+        >
+          View Rooms & Book
+        </a>
+      </div>
+
+      {/* Location Info */}
+      <div className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-emerald-200">
+        <span className="flex items-center gap-2">
+          📍 Sooriyagahawatte, Kithalella, Ella
+        </span>
+        <span className="flex items-center gap-2">
+          🚂 2.3 km from Ella Station
+        </span>
+        <span className="flex items-center gap-2">
+          ⏰ Check-in: 1:00 PM
+        </span>
+      </div>
+
+      <p className="relative z-10 text-emerald-300/60 mt-8 text-xs text-center">
+        💡 Remember: We accept cash only (LKR/USD/EUR) • Children welcome • Free parking available
       </p>
     </div>
   );
